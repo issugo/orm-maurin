@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
+use App\Employee;
+use App\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -11,6 +14,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        foreach(Employee::all() as $e) {
+            User::create(['emp_no' => $e->emp_no, 'email' => $e->first_name . '.' . $e->last_name . '@employee.edu', 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'api_token' => Str::random(80)]);
+        }
     }
 }
